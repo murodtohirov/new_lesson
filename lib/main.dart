@@ -14,27 +14,26 @@ class _MyWidgetState extends State<MyWidget> {
     for (int i = 0; i < 100; i++) {
       list.add(Container(
         margin: EdgeInsets.all(5),
-        color: Colors.red,
+        color: Colors.orange,
         height: 100,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Icon(
-              Icons.laptop,
+              Icons.phone_android,
               color: Colors.blue,
             ),
-            Text('mack_book')
+            Text('$i')
           ],
         ),
       ));
     }
 
     return MaterialApp(
+      color: Colors.black,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: ListView(
-          children: list,
-        ),
+      home: ListView(
+        children: list,
       ),
     );
   }
