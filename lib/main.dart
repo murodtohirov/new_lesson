@@ -1,44 +1,58 @@
 import 'package:flutter/material.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
+class Mycode extends StatefulWidget {
+  const Mycode({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<Mycode> createState() => _MycodeState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-  List<Widget> list = [];
+class _MycodeState extends State<Mycode> {
   @override
+  List<Widget> ls = [];
+  TextEditingController controller = TextEditingController();
   Widget build(BuildContext context) {
-    for (int i = 0; i < 100; i++) {
-      list.add(Container(
-        margin: EdgeInsets.all(5),
-        color: Colors.orange,
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Icon(
-              Icons.phone_android,
-              color: Colors.blue,
-            ),
-            Text('$i')
-          ],
-        ),
-      ));
-    }
-
+  
     return MaterialApp(
-      color: Colors.black,
       debugShowCheckedModeBanner: false,
-      home: ListView(
-        children: list,
-      ),
+      home: Scaffold(
+          body: Column(
+        children: [
+          TextField(
+            
+            onEditingComplete: () {
+              print('hi');
+            },
+            onSubmitted: (v) {
+             print( 'hello');
+            },
+            controller: controller,
+            decoration: InputDecoration(
+                suffix: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                ls.add(ListTile(title: Text(controller.text)));
+                setState(() {
+                  controller.text = '';
+                });
+              },
+            )),
+          ),
+          Expanded(
+              child: ListView.builder(
+            itemCount: ls.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: ls[index],
+              );
+            },
+          ))
+        ],
+      )),
     );
   }
 }
 
 void main() {
-  runApp(MyWidget());
+  runApp(Mycode());
 }
